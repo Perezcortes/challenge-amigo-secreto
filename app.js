@@ -1,36 +1,36 @@
 // El principal objetivo de este desafío es fortalecer tus habilidades en lógica de programación. Aquí deberás desarrollar la lógica para resolver el problema.
-// Arreglo para almacenar los nombres ingresados
 const amigos = [];
 
-// Referencias a los elementos del DOM
 const inputAmigo = document.getElementById("amigo");
 const listaAmigos = document.getElementById("listaAmigos");
 const resultado = document.getElementById("resultado");
 
-// Función para agregar un nombre a la lista
+// Expresión regular que permite letras (incluyendo acentos) y espacios
+const regexNombreValido = /^[A-Za-zÁÉÍÓÚÑáéíóúñ\s]+$/;
+
 function agregarAmigo() {
     const nombre = inputAmigo.value.trim();
 
     if (nombre === "") {
-        alert("Por favor, ingresa un nombre válido.");
+        alert("Por favor, ingresa un nombre.");
         return;
     }
 
-    // Agregar el nombre al arreglo
+    if (!regexNombreValido.test(nombre)) {
+        alert("El nombre solo debe contener letras y espacios. No se permiten números ni símbolos.");
+        return;
+    }
+
     amigos.push(nombre);
 
-    // Crear un nuevo elemento de lista
     const nuevoItem = document.createElement("li");
     nuevoItem.textContent = nombre;
     listaAmigos.appendChild(nuevoItem);
 
-    // Limpiar el input
     inputAmigo.value = "";
 }
 
-// Función para sortear un nombre al azar
 function sortearAmigo() {
-    // Limpiar resultado anterior
     resultado.innerHTML = "";
 
     if (amigos.length === 0) {
